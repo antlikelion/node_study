@@ -1,6 +1,6 @@
-const validator = require('validator')
 const notes = require('./notes')
+const chalk = require('chalk')
 
 console.log(notes())
 
-console.log(validator.isURL('귀찮구나'))
+console.log(chalk.green("Success!"));
