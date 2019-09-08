@@ -3,4 +3,4 @@ const chalk = require('chalk')
 
 console.log(notes())
 
-console.log(chalk.green("Success!"));
+console.log(chalk.red("Success!"));
