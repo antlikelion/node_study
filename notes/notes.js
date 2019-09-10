@@ -1,15 +1,11 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-const getNotes = function () {
-    return "Your notes..."
-}
+const getNotes = () => "Your notes..."
 
-const addNote = function (title, body) {
+const addNote = (title, body) => {
     const notes = loadNotes()
-    const duplicateNotes = notes.filter(function (note) {
-        return note.title === title
-    })
+    const duplicateNotes = notes.filter((note) => note.title === title)
 
     if (duplicateNotes.length === 0) {
         notes.push({
@@ -23,12 +19,12 @@ const addNote = function (title, body) {
     }
 }
 
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes)
     fs.writeFileSync('notes.json', dataJSON)
 }
 
-const loadNotes = function () {
+const loadNotes = () => {
     try {
         const dataBuffer = fs.readFileSync('notes.json')
         const dataJSON = dataBuffer.toString()
@@ -38,11 +34,9 @@ const loadNotes = function () {
     }
 }
 
-const removeNote = function (title) {
+const removeNote = (title) => {
     const notes = loadNotes()
-    const afterRemoveNotes = notes.filter(function (note) {
-        return note.title !== title
-    })
+    const afterRemoveNotes = notes.filter((note) => note.title !== title)
     if (afterRemoveNotes.length === notes.length) {
         console.log(chalk.bgRed('해당 제목의 note가 없습니다.'))
     } else {
@@ -64,8 +58,15 @@ const removeNote = function (title) {
     // }
 }
 
+const listNotes = () => {
+    const notes = loadNotes()
+    console.log(chalk.magenta.inverse("Your notes"))
+    notes.forEach((note) => console.log(note.title))
+}
+
 module.exports = {
     getNotes,
     addNote,
     removeNote,
+    listNotes
 }
