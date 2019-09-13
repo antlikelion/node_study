@@ -8,3 +8,11 @@ request({ url: url, json: true }, (error, response) => {
     let chanceOfRain = response.body.currently.precipProbability
     console.log(`${summary} It is currently ${degree} degrees out. There is a ${chanceOfRain * 100}% chance of rain`)
 })
+
+const geoUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiYW50bGlrZWxpb24iLCJhIjoiY2swaGtud3Z4MDNsMjNocGk3d2d3bGVzeiJ9.oOpboYAopMLirRQgMXCmOg&language=ko&limit=1'
+
+request({ url: geoUrl, json: true }, (error, response) => {
+    let latitude = response.body.features[0].center[1]
+    let longtitude = response.body.features[0].center[0]
+    console.log(`위도 : ${latitude}, 경도 : ${longtitude}`)
+})
