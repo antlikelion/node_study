@@ -1,15 +1,24 @@
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
+let place = process.argv[2]
 
-geocode('London', (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-})
+if (!place) {
+    return console.log('주소를 입력해주세요')
+} else {
+    geocode(place, (error, data) => {
+        if (error) {
+            return console.log('Error', error)
+        } // if else 안쓰기 위해 return 구문 썼음
+        forecast(data.latitude, data.longtitude, (error, forecastData) => {
+            if (error) {
+                return console.log('Error', error)
+            } // if else 안쓰기 위해 return 구문 썼음
+            console.log(data.location)
+            console.log(forecastData)
+        })
+    })
+}
 
-module.exports = geocode
 
 
-forecast(-75.7088, 44.1545, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-})
+
