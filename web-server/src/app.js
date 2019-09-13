@@ -1,6 +1,6 @@
-// const hbs = require('hbs')
 const path = require('path')
 const express = require('express')
+const hbs = require('hbs')
 
 console.log(__dirname)
 
@@ -8,11 +8,13 @@ const app = express()
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
-const viewsPath = path.join(__dirname, '../templates')
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
 
 // Setup handlebars engine and view location
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
 
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
@@ -34,7 +36,9 @@ app.get('/about', (req, res) => {
 
 app.get('/help', (req, res) => {
     res.render('help', {
-        helpText: "무엇을 도와드릴까요?"
+        helpText: "무엇을 도와드릴까요?",
+        title: 'Help',
+        name: "이인우"
     })
 })
 
