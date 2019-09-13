@@ -1,3 +1,4 @@
+// const hbs = require('hbs')
 const path = require('path')
 const express = require('express')
 
@@ -6,7 +7,29 @@ console.log(__dirname)
 const app = express()
 const publicDirectoryPath = path.join(__dirname, '../public')
 
+app.set('view engine', 'hbs')
 app.use(express.static(publicDirectoryPath))
+
+app.get('', (req, res) => {
+    res.render('index', { // view폴더에 있는 hbs의 파일명
+        title: 'Weather App',
+        name: '이인우'
+    })
+
+})
+
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: "About me",
+        name: "이인우"
+    })
+})
+
+app.get('/help', (req, res) => {
+    res.render('help', {
+        helpText: "무엇을 도와드릴까요?"
+    })
+})
 
 app.get('/weather', (req, res) => {
     res.send({
