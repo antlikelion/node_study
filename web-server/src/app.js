@@ -1,6 +1,8 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
 console.log(__dirname)
 
@@ -48,8 +50,21 @@ app.get('/weather', (req, res) => {
             error: '지명을 입력해주세요'
         })
     }
-    res.send({
-        address: req.query.address
+
+    geocode(req.query.address, (error, { latitude, longtitude, location }) => { // data destructuring
+        if (error) {
+            return res.send({ error })
+        } // if else 안쓰기 위해 return 구문 썼음
+        forecast(latitude, longtitude, (error, forecastData) => {
+            if (error) {
+                return res.send({ error })
+            } // if else 안쓰기 위해 return 구문 썼음
+            res.send({
+                location,
+                address: req.query.address,
+                forecast: forecastData
+            })
+        })
     })
 })
 
