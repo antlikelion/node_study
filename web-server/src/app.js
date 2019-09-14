@@ -51,7 +51,7 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    geocode(req.query.address, (error, { latitude, longtitude, location }) => { // data destructuring
+    geocode(req.query.address, (error, { latitude, longtitude, location } = {}) => { // data destructuring
         if (error) {
             return res.send({ error })
         } // if else 안쓰기 위해 return 구문 썼음
