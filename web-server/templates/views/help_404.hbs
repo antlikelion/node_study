@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    {{!-- 경로 설정 뭐죠? public이 기준인가요? --}}
 </head>
 
 <body>
-    <h1>어바웃 페이지</h1>
-    <img src="./img/1.png" alt="뭐">
+    {{>header}}
+    <p>{{message}}</p>
+    {{>footer}}
 </body>
 
 </html>

@@ -49,6 +49,22 @@ app.get('/weather', (req, res) => {
     })
 })
 
+app.get('/help/*', (req, res) => {
+    res.render('help_404', {
+        title: "help_404",
+        name: "이인우",
+        message: "help와 관련한 페이지를 찾을 수 없습니다."
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: "404",
+        name: "이인우",
+        message: "페이지를 찾을 수 없습니다."
+    })
+})
+
 app.listen(3000, () => {
     console.log('Server is up on port 3000.')
 })
