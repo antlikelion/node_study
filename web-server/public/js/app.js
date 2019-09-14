@@ -30,7 +30,7 @@ weatherForm.addEventListener('submit', (e) => {
     messageOne.textContent = '예보 정보를 받아오고 있습니다. 잠시만 기다려주세요.'
     messageTwo.textContent = null
 
-    fetch(`http://localhost:3000/weather?address=${location}`).then((response) => {
+    fetch(`/weather?address=${location}`).then((response) => {
         response.json().then((data) => {
             if (data.error) {
                 messageOne.textContent = `오류 : ${data.error}`
