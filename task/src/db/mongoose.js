@@ -31,36 +31,50 @@ const User = mongoose.model('User', {
                 throw new Error('Age must be a positive number')
             }
         }
+    },
+    password: {
+        type: String,
+        required: true,
+        validate(value) {
+            if (value.toLowerCase().includes('password')) {
+                throw new Error('password라는 문자열은 비밀번호에 포함할 수 없습니다.')
+            }
+        },
+        minlength: 7,
+        trim: true,
     }
 })
 
-const me = new User({
-    name: "    인우이    ",
-    email: " MYEMAIL@NAVER.COM   "
-})
+// const me = new User({
+//     name: "홍길동",
+//     email: "mail@mail.com",
+//     password: '해피해피해피이마트'
+// })
 
-me.save().then(() => {
-    console.log(me)
-}).catch((error) => {
-    console.log('Error!', error)
-})
+// me.save().then(() => {
+//     console.log(me)
+// }).catch((error) => {
+//     console.log('Error!', error)
+// })
 
 const Task = mongoose.model('Task', {
     description: {
-        type: String
+        type: String,
+        required: true,
+        trim: true
     },
     completed: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 })
 
-// const chinese = new Task({
-//     description: "중국어회화2 예습",
-//     completed: true
-// })
+const chinese = new Task({
+    description: "   중국어회화2 예습   "
+})
 
-// chinese.save().then((result) => {
-//     console.log(result)
-// }).catch((error) => {
-//     console.log(error)
-// })
+chinese.save().then((result) => {
+    console.log(result)
+}).catch((error) => {
+    console.log(error)
+})
