@@ -13,8 +13,47 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     }
     const db = client.db(databaseName)
 
-    db.collection('users').insertOne({
-        name: '이인우',
-        age: 28
+    // db.collection('users').insertOne({
+    //     name: '이인우',
+    //     age: 28
+    // }, (error, result) => {
+    //     if (error) {
+    //         return console.log('Unable to insert user')
+    //     }
+    //     console.log(result.ops)
+    // })
+
+    // db.collection('users').insertMany([{
+    //     name: '홍길동',
+    //     age: 50
+    // }, {
+    //     name: '임꺽정',
+    //     age: 60
+    // }], (error, result) => {
+    //     if (error) {
+    //         return console.log('Unable to insert documents')
+    //     }
+
+    //     console.log(result.ops)
+    // })
+    db.collection('tasks').insertMany([
+        {
+            describe: '전공중국어2 1과 회화1 암송',
+            boolean: false
+        },
+        {
+            describe: '60db회식',
+            boolean: false
+        },
+        {
+            describe: '파이빌 커피타임',
+            boolean: false
+        }
+    ], (error, result) => {
+        if (error) {
+            return console.log('오류가 났군요')
+        }
+
+        console.log(result.ops)
     })
 })
