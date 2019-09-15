@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
-
+// 모델 선언은 대문자로 시작
 const User = mongoose.model('User', {
     name: {
         type: String,

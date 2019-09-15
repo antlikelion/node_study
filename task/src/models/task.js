@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+// 모델 선언은 대문자로 시작
 const Task = mongoose.model('Task', {
     description: {
         type: String,
