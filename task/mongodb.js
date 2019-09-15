@@ -15,36 +15,18 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     }
     const db = client.db(databaseName)
 
-    // db.collection('users').updateOne({
-    //     _id: new ObjectID("5d7de0930f886e44ac30b6cd")
-    // }, {
-    //     $inc: {
-    //         age: 1
-    //     }
+    // db.collection('users').deleteMany({
+    //     age: 28
     // }).then((result) => {
     //     console.log(result)
     // }).catch((error) => {
     //     console.log(error)
     // })
 
-    // db.collection('tasks').updateMany({
-    //     complete: false
-    // }, {
-    //     $set: {
-    //         complete: true
-    //     }
-    // }).then((result) => {
-    //     console.log(result)
-    // }).catch((error) => {
-    //     console.log(error)
-    // })
-
-    db.collection('tasks').updateMany({}, {
-        $rename: {
-            'complete': 'completed'
-        }
+    db.collection('tasks').deleteOne({
+        describe: "파이빌 커피타임"
     }).then((result) => {
-        console.log(result.upsertedId)
+        console.log(result.acknowledged)
     }).catch((error) => {
         console.log(error)
     })
