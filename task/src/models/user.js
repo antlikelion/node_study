@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const bcrypt = require('bcryptjs')
+
 // 모델 선언은 대문자로 시작
-const User = mongoose.model('User', {
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -39,5 +41,17 @@ const User = mongoose.model('User', {
         trim: true,
     }
 })
+
+userSchema.pre('save', async function (next) {
+    const user = this
+    // 여기서 this는 몽고디비의 document를 가리킨다
+    if (user.isModified('password')) {//처음 회원가입한 경우 + 비밀번호 변경한 경우
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+
+    next()
+})
+
+const User = mongoose.model('User', userSchema)
 
 module.exports = User

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
-// 모델 선언은 대문자로 시작
-const Task = mongoose.model('Task', {
+const bcrypt = require('bcryptjs')
+
+const taskSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
@@ -11,5 +12,7 @@ const Task = mongoose.model('Task', {
         default: false
     }
 })
+// 모델 선언은 대문자로 시작
+const Task = mongoose.model('Task', taskSchema)
 
 module.exports = Task
